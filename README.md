@@ -32,3 +32,49 @@ public class MinMax {
  }
 ```
   
+## Example Run
+```
+public static void main(String[] args) throws CloneNotSupportedException {
+  Scanner sc = new Scanner(System.in);
+  System.out.println("Enter board size:");
+  int boardSize = sc.nextInt();
+  Board b = new Board(boardSize);
+  System.out.println("Enter number of ply:");
+  int numPly = sc.nextInt();
+  MinMax mm = new MinMax(b, numPly);
+
+  while( !mm.getBoard().isFinish() ) {
+    //Board move = mm.noPruning(mm.getBoard(), 0);
+    Board move = mm.alphaBetaPruning(mm.getBoard(), 0, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+    mm.setBoard(move);
+    System.out.println("\n\nAI'S TURN\n");
+    System.out.println(move);
+    System.out.println("AI: " + move.getAIScore() + "  PLAYER: " + move.getPlayerScore());
+    System.out.println("____________________________");
+    //Scanner sc = new Scanner(System.in);
+    System.out.println("\nPLAYER'S TURN");
+    System.out.println("\nEnter X:");
+    int inX = sc.nextInt();
+    System.out.println("Enter Y:");
+    int inY = sc.nextInt();
+    Board move2 = mm.getBoard(); 
+    move2.takeEdge(inX, inY);
+    move2.switchTurn();
+    mm.setBoard(move2);			
+    System.out.println(move2);
+    System.out.println("AI: " + move2.getAIScore() + "  PLAYER: " + move2.getPlayerScore());
+    System.out.println("____________________________");			
+  }
+
+  if(mm.getBoard().getAIScore() > mm.getBoard().getPlayerScore()) {
+    System.out.println("AI WON !!!");
+  }
+  else if (mm.getBoard().getAIScore() < mm.getBoard().getPlayerScore()) {
+    System.out.println("PLAYER WON !!! ");
+  }
+  else {
+    System.out.println("TIE !!!");
+  }
+}
+```
