@@ -1,5 +1,5 @@
 # Dots-and-Boxes
-##### CSC480 Artificial Intelligence
+###### CSC480 Artificial Intelligence
 Java program to use adversarial search to solve dots and boxes game.
 - MinMax search
 - MinMax search with alpha-beta prunning
